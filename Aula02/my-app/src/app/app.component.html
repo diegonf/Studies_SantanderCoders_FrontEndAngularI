@@ -1,0 +1,15 @@
+<h1>H1 do App</h1>
+<p>p do app</p>
+<app-task/>
+
+<h2>Classe dinâmica</h2>
+<span [ngClass]="{'blue': isOpen, 'red': !isOpen}">Teste</span>
+
+<h2>Variavel</h2>
+<span>{{title}}</span>
+<span>{{title2}}</span>
+
+<h2>Passar variável para componente</h2>
+<app-nome [inputFromParent]="nome"></app-nome>  <!-- aqui ele ta pegando o valor da variável nome e passado pra inputFromParent nome -->
+<app-nome inputFromParent="Ferreira"></app-nome>  <!-- Aqui ele pega o valor que eu digitei, que é Ferreira, e passando pra inputFromParent-->
+
