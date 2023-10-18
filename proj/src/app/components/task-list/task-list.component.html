@@ -1,0 +1,45 @@
+<div>
+  <h2>Tarefas</h2>
+  <div *ngIf="isVisible">
+    <label for="filtro">Filtrar: </label>
+    <input type="text" name="filtro" id="filtro" [(ngModel)]="filtro">
+    <div>
+      <h3>A Fazer</h3>
+      <ul>
+        <ng-container *ngFor="let task of tasks">
+          <li *ngIf="task.title.includes(filtro) && task.status==='A Fazer'" (click)="setShowTask(task)">
+            <div [ngClass]="{'atrasado': isTaskDelayed(task.date), 'no-prazo': !isTaskDelayed(task.date)}">
+              {{ task.title | currency}} - {{ task.date | date: 'dd/MM/yyyy' }}
+            </div>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+    <div>
+      <h3>Em Desenvolvimento</h3>
+      <ul>
+        <ng-container *ngFor="let task of tasks">
+          <li *ngIf="task.title.includes(filtro) && task.status==='Em Desenvolvimento'" (click)="setShowTask(task)">
+            <div [ngClass]="{'atrasado': isTaskDelayed(task.date), 'no-prazo': !isTaskDelayed(task.date)}">
+              {{ task.title | currency}} - {{ task.date | date: 'dd/MM/yyyy' }}
+            </div>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+    <div>
+      <h3>Finalizadas</h3>
+      <ul>
+        <ng-container *ngFor="let task of tasks">
+          <li *ngIf="task.title.includes(filtro) && task.status==='Finalizada'" (click)="setShowTask(task)">
+            <div [ngClass]="{'atrasado': isTaskDelayed(task.date), 'no-prazo': !isTaskDelayed(task.date)}">
+              {{ task.title | currency}} - {{ task.date | date: 'dd/MM/yyyy' }}
+            </div>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+
+  <button (click)="mostrarLista()">Mostrar Lista</button>
+</div>

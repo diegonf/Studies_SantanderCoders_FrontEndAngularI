@@ -1,0 +1,12 @@
+<div *ngIf="selectedTask">
+  <h2>Detalhes da Tarefa</h2>
+  <ul>
+    <li>Título: {{ selectedTask.title | uppercase }}</li>
+    <li>Descrição: {{ selectedTask.description }}</li>
+    <li>Data Nasc: {{ selectedTask.date | date: 'dd/MM/yyyy' }}</li>
+    <li>Categoria: {{ selectedTask.category }}</li>
+    <li>Status: {{ selectedTask.status }}</li>
+  </ul>
+
+  <button (click)="setHideTask()">Fechar</button>
+</div>

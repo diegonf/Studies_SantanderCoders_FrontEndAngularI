@@ -1,0 +1,4 @@
+<app-task-form [tasks]="listTask" ></app-task-form>
+<app-task-list [tasks]="listTask" (showTask)="setSelectedTask($event)" ></app-task-list>
+<app-task-view [selectedTask]="selectedTask" (hideTask)="setHideTask()"></app-task-view>
+<app-task-table [taskList]="tableListTask"></app-task-table>
