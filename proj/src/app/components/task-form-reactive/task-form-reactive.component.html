@@ -1,0 +1,50 @@
+<div>
+  <h2>Adicionar Nova Tarefa</h2>
+
+  <form>
+      <div>
+          <label for="title">Titulo: </label>
+          <input id="title" type="text" name="title" required minlength="3">
+          <!-- <ng-container *ngIf="formTitle?.touched">
+              <span *ngIf="formTitle.errors?.['minlength']" class="errorMsg">Nome deve ter pelo menos 3 caracteres!</span>
+              <span *ngIf="formTitle.errors?.['required']" class="errorMsg">Nome não poder estar em branco!</span>
+          </ng-container> -->
+      </div>
+      <div>
+          <label for="description">Descrição: </label>
+          <input id="description" type="text" name="description" required>
+          <!-- <ng-container *ngIf="addForm.submitted">
+              <span *ngIf="addForm.controls['description']?.invalid" class="errorMsg">Descrição não poder estar em branco!</span>
+          </ng-container> -->
+      </div>
+      <div>
+          <label for="date">Data de Vencimento: </label>
+          <input id="date" type="date" name="date" required [max]="">
+          <!-- <ng-container *ngIf="date.errors && addForm.submitted">
+              <span *ngIf="date.errors['required']" class="errorMsg">Data não poder estar em branco!</span>
+          </ng-container> -->
+      </div>
+      <div>
+          <label for="cost">Custo: </label>
+          <input id="cost" type="number" name="cost" required min="0">
+          <!-- <ng-container *ngIf="addForm.submitted">
+              <span *ngIf="addForm.controls['cost']?.errors?.['required']" class="errorMsg">Custo não poder estar em branco!</span>
+              <span *ngIf="addForm.controls['cost']?.errors?.['min']" class="errorMsg">Custo precisa ser maior ou igual a 0 (zero)!</span>
+          </ng-container> -->
+      </div>
+      <div>
+          <label for="status">Status: </label>
+          <select id="status" name="status" required>
+              <option value="">Selecione um status</option>
+              <option value="A Fazer">A Fazer</option>
+              <option value="Em Desenvolvimento">Em Desenvolvimento</option>
+              <option value="Finalizada">Finalizada</option>
+          </select>
+          <!-- <ng-container *ngIf="addForm.submitted">
+              <span *ngIf="status.invalid" class="errorMsg">Status não poder estar em branco!</span>
+          </ng-container> -->
+      </div>
+
+      <button type="submit">Adicionar Tarefa!</button>
+  </form>
+</div>

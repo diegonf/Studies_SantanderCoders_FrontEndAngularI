@@ -4,7 +4,7 @@
     <li>Título: {{ selectedTask.title | uppercase }}</li>
     <li>Descrição: {{ selectedTask.description }}</li>
     <li>Data Nasc: {{ selectedTask.date | date: 'dd/MM/yyyy' }}</li>
-    <li>Categoria: {{ selectedTask.category }}</li>
+    <li>Cost: {{ selectedTask.cost | currency}}</li>
     <li>Status: {{ selectedTask.status }}</li>
   </ul>
 

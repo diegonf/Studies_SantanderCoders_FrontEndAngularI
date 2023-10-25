@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Task } from 'src/models/task.model';
+import { Task } from 'src/app/models/task.model';
 
 @Component({
   selector: 'app-task-list',
@@ -7,7 +7,8 @@ import { Task } from 'src/models/task.model';
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent {
-  filtro = '';
+  categoryFilter = '';
+  textFilter = '';
   isVisible = true;
 
   @Output() showTask = new EventEmitter();
@@ -17,10 +18,10 @@ export class TaskListComponent {
    this.isVisible = !this.isVisible;
   }
 
-  isTaskDelayed(date: Date): boolean {
-    const dateNow = new Date().toISOString().split('T')[0];
-    return dateNow > date.toString();
-  }
+  // isTaskDelayed(date: Date): boolean {
+  //   const dateNow = new Date().toISOString().split('T')[0];
+  //   return dateNow > date.toString();
+  // }
 
   setShowTask(task: Task) {
     this.showTask.emit(task);

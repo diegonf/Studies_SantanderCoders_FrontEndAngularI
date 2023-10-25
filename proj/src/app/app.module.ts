@@ -8,6 +8,8 @@ import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskViewComponent } from './components/task-view/task-view.component';
 import { CurrencyPipe } from './pipes/currency.pipe';
 import { TaskTableComponent } from './components/task-table/task-table.component';
+import { TaskStatusDirective } from './directives/task-status.directive';
+import { TaskFormReactiveComponent } from './components/task-form-reactive/task-form-reactive.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { TaskTableComponent } from './components/task-table/task-table.component
     TaskViewComponent,
     CurrencyPipe,
     TaskTableComponent,
+    TaskStatusDirective,
+    TaskFormReactiveComponent,
   ],
   imports: [
     BrowserModule,

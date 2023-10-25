@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Task } from 'src/models/task.model';
+import { NgForm } from '@angular/forms';
+import { Task } from 'src/app/models/task.model';
 
 @Component({
   selector: 'app-task-form',
@@ -10,15 +11,20 @@ export class TaskFormComponent {
   @Input() tasks: Task[] = [];
 
   title = '';
-  description = '';
-  date = new Date();
-  category = '';
-  status = '';
 
-  submitTask() {
-    if (this.title === 'teste') return;
+  getCurrentDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, '0'); 
+    const day = today.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
 
-    const newTask = new Task(this.title, this.description, this.date, this.category, this.status);
+  submitTask(form: NgForm) {
+    if (form.invalid) return;
+
+    const t: Task = form.value;
+    const newTask = new Task(this.title, t.description, t.date, t.cost, t.status);
     this.tasks.push(newTask);
   }
 }

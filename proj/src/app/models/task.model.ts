@@ -1,15 +1,15 @@
 export class Task {
   title: string;
-  description: string;
   date: Date;
-  category: string;
+  description: string;
   status: string;
+  cost: string;
 
-  constructor(title = '', description = '', date = new Date(), category = '', status = '') {
+  constructor(title = '', description: string, date = new Date(), cost: string, status: string) {
     this.title = title;
     this.description = description;
     this.date = date;
-    this.category = category;
+    this.cost = cost;
     this.status = status;
   }
 }
