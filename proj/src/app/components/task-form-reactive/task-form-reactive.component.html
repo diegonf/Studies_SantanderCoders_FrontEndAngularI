@@ -1,50 +1,73 @@
-<div>
-  <h2>Adicionar Nova Tarefa</h2>
+<div class="mx-auto max-w-sm py-3">
+    <h2 class="w-full mb-3 font-bold">Adicionar Nova Tarefa</h2>
 
-  <form>
-      <div>
-          <label for="title">Titulo: </label>
-          <input id="title" type="text" name="title" required minlength="3">
-          <!-- <ng-container *ngIf="formTitle?.touched">
-              <span *ngIf="formTitle.errors?.['minlength']" class="errorMsg">Nome deve ter pelo menos 3 caracteres!</span>
-              <span *ngIf="formTitle.errors?.['required']" class="errorMsg">Nome não poder estar em branco!</span>
-          </ng-container> -->
-      </div>
-      <div>
-          <label for="description">Descrição: </label>
-          <input id="description" type="text" name="description" required>
-          <!-- <ng-container *ngIf="addForm.submitted">
-              <span *ngIf="addForm.controls['description']?.invalid" class="errorMsg">Descrição não poder estar em branco!</span>
-          </ng-container> -->
-      </div>
-      <div>
-          <label for="date">Data de Vencimento: </label>
-          <input id="date" type="date" name="date" required [max]="">
-          <!-- <ng-container *ngIf="date.errors && addForm.submitted">
-              <span *ngIf="date.errors['required']" class="errorMsg">Data não poder estar em branco!</span>
-          </ng-container> -->
-      </div>
-      <div>
-          <label for="cost">Custo: </label>
-          <input id="cost" type="number" name="cost" required min="0">
-          <!-- <ng-container *ngIf="addForm.submitted">
-              <span *ngIf="addForm.controls['cost']?.errors?.['required']" class="errorMsg">Custo não poder estar em branco!</span>
-              <span *ngIf="addForm.controls['cost']?.errors?.['min']" class="errorMsg">Custo precisa ser maior ou igual a 0 (zero)!</span>
-          </ng-container> -->
-      </div>
-      <div>
-          <label for="status">Status: </label>
-          <select id="status" name="status" required>
-              <option value="">Selecione um status</option>
-              <option value="A Fazer">A Fazer</option>
-              <option value="Em Desenvolvimento">Em Desenvolvimento</option>
-              <option value="Finalizada">Finalizada</option>
-          </select>
-          <!-- <ng-container *ngIf="addForm.submitted">
-              <span *ngIf="status.invalid" class="errorMsg">Status não poder estar em branco!</span>
-          </ng-container> -->
-      </div>
+    <form [formGroup]="taskForm" (ngSubmit)="submitTask()" #formDir="ngForm" class="w-full">
+        <div class="w-full mb-2">
+            <label for="title" class="w-full">Titulo*: </label>
+            <input id="title" type="text" name="title" required minlength="3" class="input" formControlName="title">
+            <ng-container *ngIf="taskForm.get('title')?.touched || formDir.submitted">
+                <span *ngIf="taskForm.get('title')?.hasError('required')" class="errorMsg">Nome não poder estar em
+                    branco!</span>
+                <span *ngIf="taskForm.get('title')?.errors?.['minlength']" class="errorMsg">Nome deve ter pelo menos 3
+                    caracteres!</span>
+            </ng-container>
+        </div>
+        <div class="w-full mb-2">
+            <label for="description" class="label">Descrição*: </label>
+            <input id="description" type="text" name="description" required class="input" formControlName="description">
+            <ng-container *ngIf="formDir.submitted">
+                <span *ngIf="taskForm.get('description')?.invalid" class="errorMsg">Descrição não poder estar em
+                    branco!</span>
+            </ng-container>
+        </div>
+        <div class="w-full mb-2">
+            <label for="date" class="label">Data de Vencimento*: </label>
+            <input id="date" type="date" name="date" required [max]="" class="input" formControlName="date">
+            <ng-container *ngIf="formDir.submitted">
+                <span *ngIf="taskForm.get('date')?.errors?.['required']" class="errorMsg">Data não poder estar em
+                    branco!</span>
+            </ng-container>
+        </div>
+        <div class="w-full mb-2">
+            <label for="cost" class="label">Custo (opcional): </label>
+            <input id="cost" type="number" name="cost" required min="0" class="input" formControlName="cost">
+            <ng-container *ngIf="formDir.submitted">
+                <span *ngIf="taskForm.get('cost')?.errors?.['required']" class="errorMsg">Custo não poder estar em
+                    branco!</span>
+                <span *ngIf="taskForm.get('cost')?.errors?.['min']" class="errorMsg">Custo precisa ser maior ou igual a
+                    0 (zero)!</span>
+            </ng-container>
+        </div>
+        <div class="w-full mb-2">
+            <label for="status" class="label">Status*: </label>
+            <select id="status" name="status" required class="input" formControlName="status">
+                <option value="">Selecione um status</option>
+                <option value="A Fazer">A Fazer</option>
+                <option value="Em Desenvolvimento">Em Desenvolvimento</option>
+                <option value="Finalizada">Finalizada</option>
+            </select>
+            <ng-container *ngIf="formDir.submitted">
+                <span *ngIf="taskForm.get('status')?.invalid" class="errorMsg">Status não poder estar em branco!</span>
+            </ng-container>
+        </div>
+        <div class="w-full mb-2">
+            <button type="button" class="" (click)="addTag()" class="mt-1 text-center py-1 px-5 border-2 rounded">
+                Adicionar Tag (opcional)
+            </button>
 
-      <button type="submit">Adicionar Tarefa!</button>
-  </form>
+            <div formArrayName="tags">
+                <ng-container *ngFor="let tag of tags.controls; let i = index" >
+                    <div class="flex items-center mt-1 gap-3">
+                        <label for="tags" class="w-16">Tag {{i+1}}:</label>
+                        <input id="tags" class="input" type="text" [formControlName]="i" />
+                    </div>
+                    <ng-container *ngIf="formDir.submitted">
+                        <span *ngIf="taskForm.get('tags')?.get(i.toString())?.invalid" class="errorMsg">Tag não poder estar em branco!</span>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+
+        <button type="submit" class="mt-2 w-full text-center p-1 bg-gray-300 rounded">Enviar</button>
+    </form>
 </div>

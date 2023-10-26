@@ -18,6 +18,11 @@ export class AppComponent {
   listTask: Task[] = [];
   selectedTask: Task | null = null;
   tableListTask: Task[] = [];
+  showForm = true;
+
+  setShowForm(showForm: boolean){
+    this.showForm = showForm;
+  }
 
   setSelectedTask(task: Task) {
     this.selectedTask = task;
@@ -26,5 +31,10 @@ export class AppComponent {
 
   setHideTask() {
     this.selectedTask = null;
+  }
+
+  addNewTask(task: Task) {
+    this.listTask.push(task);
+    alert('Tarefa cadastrada com sucesso!');
   }
 }
