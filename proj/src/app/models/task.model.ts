@@ -2,11 +2,11 @@ export class Task {
   title: string;
   description: string;
   date: Date;
-  status: string;
-  cost: string;
+  status: Status;
+  cost: number;
   tags: string[];
 
-  constructor(title = '', description: string, date = new Date(), cost: string, status: string, tags: string[] = []) {
+  constructor(title = '', description: string, date = new Date(), cost: number, status: Status, tags: string[] = []) {
     this.title = title;
     this.description = description;
     this.date = date;
@@ -15,3 +15,5 @@ export class Task {
     this.tags = tags;
   }
 }
+
+export type Status = 'A Fazer' | 'Em Desenvolvimento' | 'Finalizada' | '';

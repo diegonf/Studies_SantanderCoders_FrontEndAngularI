@@ -1,12 +1,24 @@
-<div *ngIf="selectedTask">
-  <h2>Detalhes da Tarefa</h2>
-  <ul>
-    <li>Título: {{ selectedTask.title | uppercase }}</li>
-    <li>Descrição: {{ selectedTask.description }}</li>
-    <li>Data Nasc: {{ selectedTask.date | date: 'dd/MM/yyyy' }}</li>
-    <li>Cost: {{ selectedTask.cost | currency}}</li>
-    <li>Status: {{ selectedTask.status }}</li>
-  </ul>
-
-  <button (click)="setHideTask()">Fechar</button>
-</div>
+<section *ngIf="selectedTask">
+  <div id="taskModal" class="fixed left-0 right-0 top-0 h-screen">
+    <div id="taskModalOverlay" class="w-full h-full bg-gray-500 bg-opacity-50 flex items-center justify-center">
+      <div id="taskModalContainer"
+        class="bg-white p-8 rounded-lg max-h-[95vh] max-w-[95vw] overflow-y-auto overflow-x-hidden relative">
+        <button (click)="setHideTask()" class="absolute right-3 top-1 text-4xl rotate-45">+</button>
+        <h2 class="text-center text-xl mb-2 font-bold w-full">Detalhes da Tarefa</h2>
+        <ul>
+          <li ><span class="font-bold">Título:</span> {{ selectedTask.title | uppercase }}</li>
+          <li ><span class="font-bold">Descrição:</span> {{ selectedTask.description }}</li>
+          <li ><span class="font-bold">Data Vencimento:</span> {{ selectedTask.date | date: 'dd/MM/yyyy' }}</li>
+          <li ><span class="font-bold">Custo:</span> {{ selectedTask.cost | currency}}</li>
+          <li ><span class="font-bold">Status:</span> {{ selectedTask.status }}</li>
+          <li >
+            <span class="font-bold">Tags: </span> 
+            <ng-container *ngFor="let tag of selectedTask.tags">
+              <span class="underline">{{ tag }}</span>&nbsp;
+            </ng-container>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

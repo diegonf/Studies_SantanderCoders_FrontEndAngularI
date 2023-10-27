@@ -7,21 +7,26 @@ import { Task } from 'src/app/models/task.model';
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent {
-  categoryFilter = '';
-  textFilter = '';
-  isVisible = true;
-
   @Output() showTask = new EventEmitter();
   @Input() tasks: Task[] = []
 
-  mostrarLista() {
-   this.isVisible = !this.isVisible;
-  }
-
-  // isTaskDelayed(date: Date): boolean {
-  //   const dateNow = new Date().toISOString().split('T')[0];
-  //   return dateNow > date.toString();
-  // }
+  kanbanCards = [
+    {
+      title: 'A Fazer',
+      status: 'A Fazer',
+      class: 'bg-blue-200 border-blue-500',
+    },
+    {
+      title: 'Em Desenvolvimento',
+      status: 'Em Desenvolvimento',
+      class: 'bg-orange-200 border-orange-500',
+    },
+    {
+      title: 'Finalizadas',
+      status: 'Finalizada',
+      class: 'bg-green-200 border-green-500',
+    }
+  ]
 
   setShowTask(task: Task) {
     this.showTask.emit(task);

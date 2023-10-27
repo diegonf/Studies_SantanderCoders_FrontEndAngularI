@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { Task } from 'src/app/models/task.model';
 
 @Component({
@@ -8,7 +8,7 @@ import { Task } from 'src/app/models/task.model';
   styleUrls: ['./task-form-reactive.component.scss']
 })
 export class TaskFormReactiveComponent {
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) { }
 
   @Input() editTask: Task | null = null;
   @Output() addTask = new EventEmitter();
@@ -26,17 +26,23 @@ export class TaskFormReactiveComponent {
     return this.taskForm.get('tags') as FormArray;
   }
 
-  submitTask() {
-    console.log('tags: ', this.taskForm.get('tags'));
-    if(this.taskForm.invalid) return;
-    this.addTask.emit(this.taskForm.value);
-    console.log('task: ', this.taskForm.value);
-    console.log('form valid: ', this.taskForm.valid);
-
-    // this.taskForm.reset();
-  }
-  
   addTag(value = '') {
     this.tags.push(this.formBuilder.control(value, Validators.required));
+  }
+
+  submitTask(formDir: FormGroupDirective) {
+    if (this.taskForm.invalid) return;
+    this.addTask.emit(this.taskForm.value);
+
+    this.clearForm(formDir);
+  }
+
+  clearForm(formDir: FormGroupDirective) {
+    formDir.resetForm(); // limpa o FormGroupDirective para limpar os estados do form (valid / invalid / submitted)
+    this.taskForm.reset(); // limpa todos os campos do formulário (exceto o tags)
+
+    while (this.tags.controls.length !== 0) { // limpa todos os campos da lista tags
+      this.tags.removeAt(0);
+    }
   }
 }

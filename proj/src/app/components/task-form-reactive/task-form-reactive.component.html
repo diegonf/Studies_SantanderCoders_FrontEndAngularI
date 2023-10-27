@@ -1,7 +1,7 @@
-<div class="mx-auto max-w-sm py-3">
-    <h2 class="w-full mb-3 font-bold">Adicionar Nova Tarefa</h2>
+<div class="mx-auto max-w-xl p-3 container">
+    <h2 class="w-full mb-3 font-bold text-xl">Adicionar Nova Tarefa</h2>
 
-    <form [formGroup]="taskForm" (ngSubmit)="submitTask()" #formDir="ngForm" class="w-full">
+    <form [formGroup]="taskForm" (ngSubmit)="submitTask(formDir)" #formDir="ngForm" class="w-full">
         <div class="w-full mb-2">
             <label for="title" class="w-full">Titulo*: </label>
             <input id="title" type="text" name="title" required minlength="3" class="input" formControlName="title">

@@ -4,14 +4,9 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'currency'
 })
 export class CurrencyPipe implements PipeTransform {
-  transform(value: string): string {
-    const numericValue = parseFloat(value);
+  transform(value: number): string {
 
-    if (isNaN(numericValue)) {
-      return 'R$ 0,00';
-    }
-
-    const formattedValue = numericValue.toLocaleString('pt-BR', {
+    const formattedValue = value.toLocaleString('pt-BR', {
       style: 'currency',
       currency: 'BRL'
     });
