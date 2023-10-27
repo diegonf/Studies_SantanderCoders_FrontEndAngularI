@@ -8,3 +8,11 @@
   display: block;
 }
 
+@layer components {
+  .input {
+    @apply w-full border-2 rounded p-1;
+  }
+  .label {
+    @apply w-full;
+  }
+}
