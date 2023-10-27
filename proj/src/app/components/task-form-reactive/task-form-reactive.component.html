@@ -1,5 +1,11 @@
-<div class="mx-auto max-w-xl p-3 container">
-    <h2 class="w-full mb-3 font-bold text-xl">Adicionar Nova Tarefa</h2>
+<div class="mx-auto w-full p-3 container relative">
+    <ng-container *ngIf="!editTask">
+        <h2 class="w-full mb-3 font-bold text-xl">Adicionar Nova Tarefa</h2>
+    </ng-container>
+    <ng-container *ngIf="editTask">
+        <h2 class="w-full mb-3 font-bold text-xl">Editar Tarefa</h2>
+        <button class="text-blue-400 hover:underline absolute top-4 right-4" (click)="setCancelEditting()">Cancelar edição</button>
+    </ng-container>
 
     <form [formGroup]="taskForm" (ngSubmit)="submitTask(formDir)" #formDir="ngForm" class="w-full">
         <div class="w-full mb-2">
@@ -68,6 +74,11 @@
             </div>
         </div>
 
-        <button type="submit" class="mt-2 w-full text-center p-1 bg-gray-300 rounded">Enviar</button>
+        <ng-container *ngIf="!editTask">
+            <button type="submit" class="mt-2 w-full text-center p-2 bg-gray-300 rounded">Adicionar</button>
+        </ng-container>
+        <ng-container *ngIf="editTask">
+            <button type="submit" class="mt-2 w-full text-center p-2 bg-gray-300 rounded">Atualizar</button>
+        </ng-container>
     </form>
 </div>

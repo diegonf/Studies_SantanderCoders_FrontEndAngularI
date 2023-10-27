@@ -1,14 +1,6 @@
 import { Component } from '@angular/core';
 import { Task } from './models/task.model';
 
-// export interface IListTask {
-//   title: string;
-//   description: string;
-//   date: Date;
-//   category: string;
-//   status: string;
-// }
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,67 +9,49 @@ import { Task } from './models/task.model';
 export class AppComponent {
   listTask: Task[] = [
     {
-      title: 'tarefa a fazer',
-      description: 'desc a fazer',
-      cost: 10,
+      id: 0,
+      title: 't00',
+      description: 'd0',
+      cost: 0,
       date: new Date(),
       status: 'A Fazer',
       tags: ['Angular', 'Angular2']
     },
     {
-      title: 'tarefa a fazer',
-      description: 'desc a fazer',
-      cost: 10,
+      id: 1,
+      title: 't11',
+      description: 'd1',
+      cost: 1,
       date: new Date('12/25/2020'),
       status: 'A Fazer',
-      tags: []
+      tags: ['tarefa1', 'sei la']
     },
     {
-      title: 'tarefa a fazer',
-      description: 'desc a fazer',
-      cost: 10,
-      date: new Date('02/06/1991'),
-      status: 'A Fazer',
-      tags: []
-    },
-    {
-      title: 'tarefa em andamento',
-      description: 'desc em andamento',
-      cost: 10,
-      date: new Date(),
-      status: 'Em Desenvolvimento',
-      tags: []
-    },
-    {
-      title: 'tarefa em andamento',
-      description: 'desc em andamento',
-      cost: 10,
+      id: 2,
+      title: 't22',
+      description: 'd2',
+      cost: 2,
       date: new Date('01/01/2018'),
       status: 'Em Desenvolvimento',
-      tags: []
+      tags: ['2']
     },
     {
-      title: 'tarefa finalizada',
-      description: 'desc finalizada',
-      cost: 10,
-      date: new Date(),
-      status: 'Finalizada',
-      tags: []
-    },
-    {
-      title: 'tarefa finalizada',
-      description: 'desc finalizada',
-      cost: 10,
+      id: 3,
+      title: 't33',
+      description: 'd3',
+      cost: 3,
       date: new Date('10/10/1900'),
       status: 'Finalizada',
-      tags: []
-    }
+      tags: ['finalizada a mto tempo', 'nois']
+    },
   ];
+  taskToBeEditted: Task | null = null;
   selectedTask: Task | null = null;
-  tableListTask: Task[] = [];
-  showForm = false;
-  showKanban = false;
-  showLog = false;
+  log: Task[] = [];
+  showForm = true;
+  showKanban = true;
+  showLog = true;
+  id = 10;
 
   setShowForm(showForm: boolean) {
     this.showForm = showForm;
@@ -91,7 +65,7 @@ export class AppComponent {
 
   setSelectedTask(task: Task) {
     this.selectedTask = task;
-    this.tableListTask.push(task);
+    this.log.push(task);
   }
 
   setHideTask() {
@@ -99,7 +73,35 @@ export class AppComponent {
   }
 
   addNewTask(task: Task) {
-    this.listTask.push(task);
+    this.listTask.push({...task, id: ++this.id});
     alert('Tarefa cadastrada com sucesso!');
+  }
+
+  deleteTask(task: Task) {
+    const taskIndex = this.listTask.findIndex(item => item.id === task.id);
+    if(taskIndex === -1) {
+      alert(`ID ${task.id} não encontrado!`);
+      return;
+    }
+    
+    this.listTask.splice(taskIndex, 1);
+    this.taskToBeEditted = null;
+    alert(`Task #${task.id} deletada com sucesso!`);
+  }
+
+  setEditTask(task: Task | null){
+    this.taskToBeEditted = task;
+    if(task) this.showForm = true;
+  }
+
+  editTask(task: Task) {
+    const taskIndex = this.listTask.findIndex(item => item.id === task.id);
+    if(taskIndex === -1) {
+      alert(`ID ${task.id} não encontrado!`);
+      return;
+    }
+    this.listTask.splice(taskIndex, 1, task);
+    this.taskToBeEditted = null;
+    alert(`Task #${task.id} alterada com sucesso!`);
   }
 }

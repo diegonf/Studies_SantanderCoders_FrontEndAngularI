@@ -8,7 +8,13 @@
       <button class="mr-3" (click)="setShowForm(false)" *ngIf="showForm">Esconder Formulário</button>
     </div>
     <!-- <app-task-form [tasks]="listTask" ></app-task-form> -->
-    <app-task-form-reactive (addTask)="addNewTask($event)" *ngIf="showForm"></app-task-form-reactive>
+    <app-task-form-reactive 
+      *ngIf="showForm"
+      (addTask)="addNewTask($event)" 
+      (editTask)="editTask($event)"
+      (cancelEditting)="setEditTask(null)"
+      [taskToBeEditted]="taskToBeEditted"
+    ></app-task-form-reactive>
   </div>
   <div class="mb-1">
     <div class="border-b-2 flex justify-end">
@@ -23,11 +29,16 @@
       <button class="mr-3" (click)="setShowLog(true)" *ngIf="!showLog">Mostrar Log</button>
       <button class="mr-3" (click)="setShowLog(false)" *ngIf="showLog">Esconder Log</button>
     </div>
-    <app-task-table [taskList]="tableListTask" *ngIf="showLog"></app-task-table>
+    <app-task-table [log]="log" *ngIf="showLog"></app-task-table>
   </div>
 
   <div>
-    <app-task-view [selectedTask]="selectedTask" (hideTask)="setHideTask()"></app-task-view>
+    <app-task-view 
+      [selectedTask]="selectedTask" 
+      (hideTask)="setHideTask()"
+      (editTask)="setEditTask($event)"
+      (deleteTask)="deleteTask($event)"
+    ></app-task-view>
   </div>
 </main>
 <footer class="bg-gray-200 w-screen">

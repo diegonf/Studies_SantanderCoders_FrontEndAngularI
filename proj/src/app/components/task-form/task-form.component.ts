@@ -24,7 +24,7 @@ export class TaskFormComponent {
     if (form.invalid) return;
 
     const t: Task = form.value;
-    const newTask = new Task(this.title, t.description, t.date, t.cost, t.status);
+    const newTask = new Task(this.title, t.description, t.date, t.cost, t.status, []);
     this.tasks.push(newTask);
   }
 }

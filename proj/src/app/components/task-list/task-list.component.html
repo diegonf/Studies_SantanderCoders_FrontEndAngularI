@@ -2,7 +2,7 @@
   <h2 class="w-full text-center font-bold text-xl mb-2">Cards Kanban</h2>
   <div class="flex justify-center gap-12">
     <ng-container *ngFor="let card of kanbanCards">
-      <div class="bg-gray-300 min-h-[25rem] grow p-3 rounded border-2" [ngClass]="card.class">
+      <div class="bg-gray-300 min-h-[25rem] w-[31%] p-3 rounded border-2" [ngClass]="card.class">
         <h3 class="text-lg font-bold w-full mb-1 text-center">{{ card.title | uppercase}}</h3>
         <ul>
           <ng-container *ngFor="let task of tasks">

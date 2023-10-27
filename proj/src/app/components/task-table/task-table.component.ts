@@ -7,5 +7,5 @@ import { Task } from 'src/app/models/task.model';
   styleUrls: ['./task-table.component.scss']
 })
 export class TaskTableComponent {
-  @Input() taskList: Task[] = [];
+  @Input() log: Task[] = [];
 }
